@@ -8,6 +8,7 @@ from data import getData
 from results import write_to_file
 from results import write_to_file_similarity
 from graph import algo1Graph
+import time
 
 # gets data and lower dimensionality on which the data has to be represented
 dense,lC = getData()
@@ -38,17 +39,21 @@ for j in range(6):
     # In each step B is computed from R
     # B is initialized to empty
     B = []
+    B1 = []
     # each column of B is calculated from each column of data and appended to matrix B
     # each column of B is obtained using algo1
     #step 1
+    start = time.time()
+    print('Iteration-',j+1)
     for i in range(len(dense)):
         if i ==0:
-            B = algo1(np.matmul(RT,dense[i].T))
+            B,B1 = algo1(np.matmul(RT,dense[i].T))
         else:
-            A = algo1(np.matmul(RT,dense[i].T))
+            A,A1 = algo1(np.matmul(RT,dense[i].T))
             B = np.append(B,A,1)
+            B1 = np.append(B1,A1,1)
             
-    print(B.shape)
+    #print(B.shape)
     
     #step 2
     X = dense.T
@@ -59,8 +64,11 @@ for j in range(6):
     # R is the product of Uc and V transpose
     R =  np.matmul(U[:,0:lC],V.T)
     RT = R.T
+    done = time.time()    
+    elapsed = done - start
+    print('elapsed time: ',elapsed)
     RT = np.array(RT)
-    print(RT.shape)
+    #print(RT.shape)
     print(dense.shape,'dense shape')
 
 
@@ -73,7 +81,7 @@ write_to_file("Original.csv",dense)
 
 
 # writes the points obtained after mapping it to binary codes
-write_to_file("Converted.csv",B)
+write_to_file("Converted_512.csv",B)
     
     
 
