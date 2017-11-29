@@ -22,6 +22,6 @@ def getData():
     print(dense.shape)
     
     #dense = dense[:,0:20000]
-    lC = 200
+    lC = 512
 	# lC is the num of dimensions after reducing the dimensionality
     return dense,lC
