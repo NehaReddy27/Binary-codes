@@ -18,7 +18,7 @@ def getData():
 	# printing the original data file size  
     print(dense.shape)
     # reshaping the data matrix
-    dense = dense[0:50,0:200]
+    dense = dense[0:1000,0:1000]
     print(dense.shape)
     
     #dense = dense[:,0:20000]
