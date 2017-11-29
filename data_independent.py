@@ -42,12 +42,16 @@ def algo1(x):
             k = i+1
     # forms the point with k ones at k largest positions of the point
     b = [0 for i in range(len(x))]
+    b1 = [0 for i in range(len(x))]
+    
     for i in range(k+1):
         # x[i][0] represents the position of ith largest feature value in x
         # the corresponding position is made to 1
         # the magnitude of the point is made 1 
         b[x[i][0]] = 1/math.sqrt(k+1)
+        b1[x[i][0]] = 1
     
     b = np.matrix(b)
     # the point is returned as a column matrix
-    return b.T
+    b1 = np.matrix(b1)
+    return b.T, b1.T
